@@ -2,6 +2,8 @@ UnityYGM
 --------
 
 Unity game workshop for Young Game Makers.  Example game is a 3D endless shooter.
+![Screenshot](http://glitchbeam.com/wp-content/uploads/2015/01/ygm_workshop.png)
+
 
 * Please read all sections of this guide.  
 * Questions: [@jasonrwalters](http://twitter.com/jasonrwalters)
