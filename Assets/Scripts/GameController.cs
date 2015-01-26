@@ -5,7 +5,7 @@
 //   http://glitchbeam.com
 //   @jasonrwalters
 //
-//   last edited on 1/23/2015
+//   last edited on 1/26/2015
 //-----------------------------------------
 
 using UnityEngine;
@@ -30,7 +30,6 @@ public class GameController : MonoBehaviour
     public AudioClip sndPlayGame;
     public AudioClip sndReplayGame;
     public AudioClip sndGameOver;
-    public float score = 0.0f;
     public float maxSpeed = 0.0f;
 
     private GameObject[] go0, go1, go2;
@@ -182,7 +181,7 @@ public class GameController : MonoBehaviour
         if (changeState && gameState != GameStates.GameOver)
         {
             // clear the score
-            score = 0.0f;
+            gameScore = 0.0f;
         }
 
         // if game over...
