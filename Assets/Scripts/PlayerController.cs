@@ -5,7 +5,7 @@
 //   http://glitchbeam.com
 //   @jasonrwalters
 //
-//   last edited on 1/23/2015
+//   last edited on 3/23/2015
 //-----------------------------------------
 
 using UnityEngine;
@@ -22,17 +22,30 @@ public class PlayerController : MonoBehaviour
     public float bounceSpeed;
 
     public GameObject bullet;
+    public AudioClip audioBullet;
     public float fireDistance;
-
     public GameObject explosion;
+    public AudioClip audioExplosion;
+    public float volume = 0.1f;
 
     private Vector3 defaultPos;
     private float inputHorizontal;
     private float inputVertical;
     private float seconds;
 
+    private Rigidbody rigid;
+    private AudioSource audioSrc;
+    private Renderer rend;
+    private Collider col;
+
     void Start ()
     {
+        // cache components
+        rigid = GetComponent<Rigidbody>();
+        audioSrc = GetComponent<AudioSource>();
+        rend = GetComponent<Renderer>();
+        col = GetComponent<Collider>();
+
         // fetch default position from our inspector
         defaultPos = transform.position;
     }
@@ -47,8 +60,8 @@ public class PlayerController : MonoBehaviour
         if (gameState == GameStates.GamePlay)
         {
             // disable renderer and collider
-            if (!renderer.enabled) renderer.enabled = true;
-            if (!collider.enabled) collider.enabled = true;
+            if (!rend.enabled) rend.enabled = true;
+            if (!col.enabled) col.enabled = true;
 
             // fire button triggers bullets (space bar)
             if (Input.GetButtonDown("Jump"))
@@ -60,8 +73,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             // disable renderer and collider
-            if (renderer.enabled) renderer.enabled = false;
-            if (collider.enabled) collider.enabled = false;
+            if (rend.enabled) rend.enabled = false;
+            if (col.enabled) col.enabled = false;
             // reset player position to default
             transform.position = defaultPos;
         }
@@ -89,24 +102,29 @@ public class PlayerController : MonoBehaviour
     {
         // update player velocity
         Vector3 input = new Vector3(inputHorizontal, inputVertical, 0.0f);
-        rigidbody.velocity = input * speed;
+        rigid.velocity = input * speed;
 
         // create a hover effect using a sin wave
-        float bounceY = rigidbody.position.y + bounce * Mathf.Sin(bounceSpeed * Time.time);
+        float bounceY = rigid.position.y + bounce * Mathf.Sin(bounceSpeed * Time.time);
 
         // apply hover effect, and clamp player within bounds
-        rigidbody.position = new Vector3(Mathf.Clamp(rigidbody.position.x, -boundsWidth, boundsWidth),
+        rigid.position = new Vector3(Mathf.Clamp(rigid.position.x, -boundsWidth, boundsWidth),
                                          Mathf.Clamp(bounceY, -boundsHeight, boundsHeight),
-                                         rigidbody.position.z);
+                                         rigid.position.z);
 
         // apply tilt effect to our rotation
-        float tiltX = rigidbody.velocity.y * -tilt;
-        float tiltZ = rigidbody.velocity.x * -tilt;
-        rigidbody.rotation = Quaternion.Euler(tiltX, 0.0f, tiltZ);
+        float tiltX = rigid.velocity.y * -tilt;
+        float tiltZ = rigid.velocity.x * -tilt;
+        rigid.rotation = Quaternion.Euler(tiltX, 0.0f, tiltZ);
     }
 
     void Fire (float distance)
     {
+        // play bullet-fire sound
+        audioSrc.clip = audioBullet;
+        audioSrc.volume = volume * 0.5f; // multiplying it by 50% because effect iss still too loud...
+        audioSrc.Play();
+
         // define left firing position, add distance to spawn ahead of player
         Vector3 fireFromLeft = new Vector3(transform.position.x - distance,
                                 transform.position.y,
@@ -125,7 +143,9 @@ public class PlayerController : MonoBehaviour
     void Destruction()
     {
         // play destruction sound
-        audio.Play();
+        audioSrc.clip = audioExplosion;
+        audioSrc.volume = volume;
+        audioSrc.Play();
 
         // spawn an explosion effect
         Instantiate(explosion, transform.position, transform.rotation);
@@ -135,10 +155,10 @@ public class PlayerController : MonoBehaviour
         GameController.changeState = true;
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider coll)
     {
         // if player collides with a danger object...
-        if (col.gameObject.tag == "Danger")
+        if (coll.gameObject.tag == "Danger")
         {
             // run destruction function
             Destruction();

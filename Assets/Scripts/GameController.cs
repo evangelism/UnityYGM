@@ -5,7 +5,7 @@
 //   http://glitchbeam.com
 //   @jasonrwalters
 //
-//   last edited on 1/26/2015
+//   last edited on 3/23/2015
 //-----------------------------------------
 
 using UnityEngine;
@@ -30,8 +30,10 @@ public class GameController : MonoBehaviour
     public AudioClip sndPlayGame;
     public AudioClip sndReplayGame;
     public AudioClip sndGameOver;
+    public float maxVolume = 0.75f;
     public float maxSpeed = 0.0f;
 
+    private AudioSource audioSrc;
     private GameObject[] go0, go1, go2;
     private GameObject goBack;
     private int firstTimeLaunch;
@@ -39,6 +41,9 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        // cache components
+        audioSrc = GetComponent<AudioSource>();
+
         // setup game settings
         SettingsDefault();
 
@@ -72,7 +77,7 @@ public class GameController : MonoBehaviour
 
             // default audio settings
             audioEnabled = 1;
-            audioVolume = 0.75f;
+            audioVolume = maxVolume;
 
             // change this toggle to 1
             // this means the app has run it's initial launch
@@ -228,14 +233,14 @@ public class GameController : MonoBehaviour
     void AudioController(AudioClip clipName)
     {
         // update our audio volume
-        audio.volume = audioVolume;
+        audioSrc.volume = audioVolume;
 
         // if audio is active...
         if (audioEnabled == 1)
         {
             // play specified clip
-            audio.clip = clipName;
-            audio.Play();
+            audioSrc.clip = clipName;
+            audioSrc.Play();
         }
     }
 

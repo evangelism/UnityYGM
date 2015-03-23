@@ -5,7 +5,7 @@
 //   http://glitchbeam.com
 //   @jasonrwalters
 //
-//   last edited on 1/23/2015
+//   last edited on 3/23/2015
 //-----------------------------------------
 
 using UnityEngine;
@@ -14,34 +14,37 @@ using System.Collections;
 
 public class ScoreTextController : MonoBehaviour 
 {
+    private Text txt;
 
     void OnDisable ()
     {
         // clear the text
-        GetComponent<Text>().text = string.Empty;
+        txt.text = string.Empty;
     }
 
     void OnEnable ()
     {
-        if (gameObject.name == "MainMenu_Text_HighScore")
+        // cache components
+        txt = GetComponent<Text>();
+
+        if (this.gameObject.name == "MainMenu_Text_HighScore")
         {
             float highScore = GameController.gameHighScore;
-            GetComponent<Text>().text = "Highscore " + highScore;
+            txt.text = "Highscore " + highScore;
         }
-
-        if (gameObject.name == "GameOver_Text_Score_Time")
+        else if (this.gameObject.name == "GameOver_Text_Score_Time")
         {
             float score = GameController.gameScore;
-            GetComponent<Text>().text = "You scored " + score + " points!";
+            txt.text = "You scored " + score + " points!";
         }
     }
 
     void Start ()
     {
-        if (gameObject.name == "MainMenu_Text_HighScore")
+        if (this.gameObject.name == "MainMenu_Text_HighScore")
         {
             float highScore = GameController.gameHighScore;
-            GetComponent<Text>().text = "Highscore " + highScore;
+            txt.text = "Highscore " + highScore;
         }
     }
 	
@@ -49,10 +52,10 @@ public class ScoreTextController : MonoBehaviour
 	void Update ()
     {
         // update the score based on following object names
-        if (gameObject.name == "GamePlay_Text_Score_Time")
+        if (this.gameObject.name == "GamePlay_Text_Score_Time")
         {
             float score = GameController.gameScore;
-            GetComponent<Text>().text = "Score " + score;
+            txt.text = "Score " + score;
         }
 	}
 }

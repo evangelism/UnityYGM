@@ -5,7 +5,7 @@
 //   http://glitchbeam.com
 //   @jasonrwalters
 //
-//   last edited on 1/23/2015
+//   last edited on 3/23/2015
 //-----------------------------------------
 
 using UnityEngine;
@@ -17,10 +17,23 @@ public class Danger : MonoBehaviour
     public float destroySeconds;
     public float destroyScore;
     public GameObject explosion;
+    public AudioClip soundExp;
+    public float volume;
+
+    private Rigidbody rigid;
+    private AudioSource audioSrc;
+    private Renderer rend;
+    private Collider col;
 
     // Use this for initialization
     void Start()
     {
+        // cache components
+        rigid = GetComponent<Rigidbody>();
+        audioSrc = GetComponent<AudioSource>();
+        rend = GetComponent<Renderer>();
+        col = GetComponent<Collider>();
+
         // destroy object after x seconds
         Destroy(this.gameObject, destroySeconds);
     }
@@ -29,7 +42,7 @@ public class Danger : MonoBehaviour
     void FixedUpdate()
     {
         // add forward force to the object
-        rigidbody.velocity = transform.forward * -(speedDiff + GameController.gameSpeed);
+        rigid.velocity = transform.forward * -(speedDiff + GameController.gameSpeed);
     }
 
     void Destruction()
@@ -38,19 +51,21 @@ public class Danger : MonoBehaviour
         GameController.gameScore += destroyScore;
 
         // play destruction sound
-        audio.Play();
+        audioSrc.clip = soundExp;
+        audioSrc.volume = volume;
+        audioSrc.Play();
 
         // spawn explosion effect
         Instantiate(explosion, transform.position, transform.rotation);
 
         // disable render and collider
-        renderer.enabled = false;
-        collider.enabled = false;
+        rend.enabled = false;
+        col.enabled = false;
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider coll)
     {
-        if (col.gameObject.tag == "Bullet")
+        if (coll.gameObject.tag == "Bullet")
         {
             Destruction();
         }

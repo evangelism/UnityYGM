@@ -5,7 +5,7 @@
 //   http://glitchbeam.com
 //   @jasonrwalters
 //
-//   last edited on 1/23/2015
+//   last edited on 3/23/2015
 //-----------------------------------------
 
 using UnityEngine;
@@ -16,11 +16,13 @@ public class Bullet : MonoBehaviour
     public float speedDiff;
     public float destroySeconds;
 
+    private Rigidbody rigid;
+
 	// Use this for initialization
 	void Start () 
     {
-        // play bullet sound
-        audio.Play();
+        // cache components
+        rigid = GetComponent<Rigidbody>();
 
         // destroy object after x seconds
         Destroy(this.gameObject, destroySeconds);
@@ -30,10 +32,10 @@ public class Bullet : MonoBehaviour
 	void FixedUpdate () 
     {
         // add forward force to the bullet
-        rigidbody.velocity = transform.forward * (speedDiff + GameController.gameSpeed);
+        rigid.velocity = transform.forward * (speedDiff + GameController.gameSpeed);
 	}
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider coll)
     {
         // if bullet collides with anything, destroy it
         Destroy(this.gameObject);

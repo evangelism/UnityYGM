@@ -5,7 +5,7 @@
 //   http://glitchbeam.com
 //   @jasonrwalters
 //
-//   last edited on 1/23/2015
+//   last edited on 3/23/2015
 //-----------------------------------------
 
 using UnityEngine;
@@ -16,8 +16,13 @@ public class Explosion : MonoBehaviour
     public float speedDiff;
     public float destroySeconds;
 
+    private Rigidbody rigid;
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        // cache components
+        rigid = GetComponent<Rigidbody>();
 
         // destroy object after x seconds
         Destroy(this.gameObject, destroySeconds);
@@ -27,6 +32,6 @@ public class Explosion : MonoBehaviour
 	void FixedUpdate ()
     {
         // add forward force to the Explosion
-        rigidbody.velocity = transform.forward * -(speedDiff + GameController.gameSpeed);
+        rigid.velocity = transform.forward * -(speedDiff + GameController.gameSpeed);
 	}
 }
