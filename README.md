@@ -7,6 +7,7 @@ Unity game workshop for Young Game Makers.  Example game is a 3D endless shooter
 
 * Please read all sections of this guide.  
 * Questions: [@jasonrwalters](http://twitter.com/jasonrwalters)
+* Code is commented - please read to understand what's happening.  :)
 
 
 Requirements
