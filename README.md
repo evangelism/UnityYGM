@@ -11,7 +11,7 @@ Unity game workshop for Young Game Makers.  Example game is a 3D endless shooter
 
 Requirements
 --------
-* [Unity 4.6+](http://unity3d.com/unity/download)
+* [Unity 5.0+](http://unity3d.com/unity/download)
 
 
 Unity Resources
