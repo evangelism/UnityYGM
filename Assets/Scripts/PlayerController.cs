@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour
     void PlayerInput()
     {
         // fetch our input for movememnt
-        inputHorizontal = Input.GetAxisRaw("Horizontal");
-        inputVertical = Input.GetAxisRaw("Vertical");
+        inputHorizontal = Input.GetAxis("Horizontal");
+        inputVertical = Input.GetAxis("Vertical");
 
         if (invertYAxis)
         {
