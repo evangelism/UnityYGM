@@ -37,5 +37,5 @@ Scenes
 
 Controls
 --------
-* You can still use the arrow keys or wasd to control the player ship, but it will not work in VR.
-* Spacebar to start and fire weapons.
+* Tilt your head sideways to move the player left/right
+* Move your head up/down to rise/lower the character

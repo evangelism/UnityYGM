@@ -50,6 +50,9 @@
      <None Include="Assets\ALPS\LICENSE.txt" />
      <None Include="Assets\ALPS\Shaders\ALPSDistortion.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>D:/WORK/UnityYGM/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -85,6 +88,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{57EBA908-EFE4-0297-17EC-8DA7DF76D5AE}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-vs.csproj">
       <Project>{BAD1B760-F86E-E34A-41ED-D8B92EF42F8E}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>

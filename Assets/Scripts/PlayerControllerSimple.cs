@@ -102,8 +102,12 @@ public class PlayerControllerSimple : MonoBehaviour
 	void PlayerInput()
 	{
 		// fetch our input for movememnt
-		inputHorizontal = Input.GetAxis("Horizontal");
-		inputVertical = Input.GetAxis("Vertical");
+		//inputHorizontal = Input.GetAxis("Horizontal");
+		//inputVertical = Input.GetAxis("Vertical");
+
+		// Control the movement with head tilt instead of keys
+		inputHorizontal = -7.0f*norm(head.transform.eulerAngles.z);
+		inputVertical = -6.0f * norm (head.transform.eulerAngles.x);
 
 		if (invertYAxis)
 		{
