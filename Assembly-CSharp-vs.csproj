@@ -46,6 +46,19 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ALPS\Scripts\ALPSAndroid.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSBarrelMesh.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSCamera.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSConfig.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSController.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSControllerLight.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSCrosshairs.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSDevice.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSGUI.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSGyro.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSNavigation.cs" />
+     <Compile Include="Assets\ALPS\Scripts\ALPSWP8.cs" />
+     <Compile Include="Assets\ALPS\Scripts\MagnetSensor.cs" />
      <Compile Include="Assets\Scripts\BonusItem.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Danger.cs" />
@@ -54,8 +67,12 @@
      <Compile Include="Assets\Scripts\GameControllerSimple.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerControllerSimple.cs" />
+     <Compile Include="Assets\Scripts\RotateObject.cs" />
      <Compile Include="Assets\Scripts\ScoreTextController.cs" />
      <Compile Include="Assets\Scripts\SpawnObjects.cs" />
+     <None Include="Assets\ALPS\LICENSE.txt" />
+     <None Include="Assets\ALPS\Shaders\ALPSDistortion.shader" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

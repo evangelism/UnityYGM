@@ -2,7 +2,8 @@ UnityYGM-Russia
 ---------------
 
 Unity game workshop for Young Game Makers - Microsoft Russia Flavour.  Example game is a 3D 
-endless shooter.
+endless shooter. This version of workshop is intended for Cardboard VR headset, and uses [ALPS-VR
+project](https://github.com/shwars/ALPS-VR).
 ![Screenshot](http://glitchbeam.com/wp-content/uploads/2015/01/ygm_workshop.png)
 
 * Please read all sections of this guide.  
@@ -13,7 +14,7 @@ endless shooter.
 Requirements
 --------
 * [Unity 5.0+](http://unity3d.com/unity/download)
-
+* [ALPS-VR](https://github.com/shwars/ALPS-VR)
 
 Unity Resources
 --------
@@ -31,12 +32,10 @@ Game Design Resources
 
 Scenes
 --------
-* Run `FinishedProject` for the complete version and press play in the Unity editor.
-* Run `OneSceneProject` for the example of the main gameplay without menu (this is useful as peparation step for VR project)
+* Run `OneSceneProject`
+* When building for Windows Phone 8.1, use Windows Store Build option in Unity5, and chose Windows Phone 8.1 as target
 
 Controls
 --------
-* Use the arrow keys or wasd to control the player ship.
-* Joysticks will also work.
+* You can still use the arrow keys or wasd to control the player ship, but it will not work in VR.
 * Spacebar to start and fire weapons.
-* Esc to go back/exit (in full mode).
