@@ -18,6 +18,8 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody rigid;
 
+	public bool useSimpleController = false;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -31,8 +33,9 @@ public class Bullet : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
     {
+		var gs = useSimpleController ? GameControllerSimple.gameSpeed : GameController.gameSpeed;
         // add forward force to the bullet
-        rigid.velocity = transform.forward * (speedDiff + GameController.gameSpeed);
+        rigid.velocity = transform.forward * (speedDiff + gs);
 	}
 
     void OnTriggerEnter(Collider coll)

@@ -25,6 +25,8 @@ public class Danger : MonoBehaviour
     private Renderer rend;
     private Collider col;
 
+	public bool useSimpleController = false;
+
     // Use this for initialization
     void Start()
     {
@@ -41,14 +43,16 @@ public class Danger : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+		var gs = useSimpleController ? GameControllerSimple.gameSpeed : GameController.gameSpeed;
         // add forward force to the object
-        rigid.velocity = transform.forward * -(speedDiff + GameController.gameSpeed);
+        rigid.velocity = transform.forward * -(speedDiff + gs);
     }
 
     void Destruction()
     {
         // increase the game score by 1
-        GameController.gameScore += destroyScore;
+		if (useSimpleController) GameControllerSimple.gameScore += destroyScore; 
+		else GameController.gameScore += destroyScore;
 
         // play destruction sound
         audioSrc.clip = soundExp;

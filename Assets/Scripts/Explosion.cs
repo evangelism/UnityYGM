@@ -15,7 +15,7 @@ public class Explosion : MonoBehaviour
 {
     public float speedDiff;
     public float destroySeconds;
-
+	public bool useSimpleController = false;
     private Rigidbody rigid;
 
 	// Use this for initialization
@@ -31,7 +31,8 @@ public class Explosion : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+		var gs = useSimpleController ? GameControllerSimple.gameSpeed : GameController.gameSpeed;
         // add forward force to the Explosion
-        rigid.velocity = transform.forward * -(speedDiff + GameController.gameSpeed);
+        rigid.velocity = transform.forward * -(speedDiff + gs);
 	}
 }

@@ -28,6 +28,8 @@ public class BonusItem : MonoBehaviour
     private Renderer rend;
     private Collider col;
 
+	public bool useSimpleController = false;
+
     // Use this for initialization
     void Start()
     {
@@ -44,8 +46,10 @@ public class BonusItem : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+		var gs = useSimpleController ? GameControllerSimple.gameSpeed : GameController.gameSpeed;
+
         // add forward force to the object
-        rigid.velocity = transform.forward * -(speedDiff + GameController.gameSpeed);
+        rigid.velocity = transform.forward * -(speedDiff + gs);
 
         // create a hover effect using a sin wave
         float bounceY = rigid.position.y + bounce * Mathf.Sin(bounceSpeed * Time.time);
@@ -77,8 +81,8 @@ public class BonusItem : MonoBehaviour
 
             // when player collects, award by
             // increasing the game score by 10 points
-            GameController.gameScore += 10.0f;
-
+            if (useSimpleController) GameControllerSimple.gameScore += 10.0f;
+			else GameController.gameScore += 10.0f;
             // run desctuion function
             Destruction();
         }
@@ -90,7 +94,8 @@ public class BonusItem : MonoBehaviour
 
             // when bonus is shot, penalize the player by
             // decreasing the game score by 10 points
-            GameController.gameScore -= 10.0f;
+			if (useSimpleController) GameControllerSimple.gameScore -= 10.0f;
+            else GameController.gameScore -= 10.0f;
 
             // run desctuion function
             Destruction();
